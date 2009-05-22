@@ -7,13 +7,13 @@ Feature: Adding a card
   Scenario: Adding the first card
     Given I don't have a rolodex
 
-    When I run the app with "add github"
+    When I run "roc add github"
     Then the app should output "Creating new rolodex."
-    And I should be prompted "Please enter a password for your rolodex:"
+    And the app should prompt "Please enter a password for your rolodex: "
 
     When I enter "wibble"
-    Then the app should launch my text editor
-    And the contents of the file should be:
+    Then the app should launch my editor
+    And my editor should contain:
       """
       site: http://www.github.com
       user: 
@@ -27,11 +27,9 @@ Feature: Adding a card
       pass: kablam!
       """
     Then the app should exit with status 0
-    And there should be no output
-    And there should be no error
 
-    When I run the app with "show github"
-    Then I should be prompted for a password
+    When I run "roc show github"
+    Then the app should prompt "Password: "
 
     When I enter "wibble"
     Then the app should output:
@@ -45,12 +43,12 @@ Feature: Adding a card
   Scenario: Successfully adding a new card
     Given I have a rolodex with password "wibble"
 
-    When I run the app with "add github"
-    Then I should be prompted for a password
+    When I run "roc add github"
+    Then the app should prompt "Password: "
 
     When I enter "wibble"
-    Then the app should launch my text editor
-    And the contents of the file should be:
+    Then the app should launch my editor
+    And my editor should contain:
       """
       site: http://www.github.com
       user: 
@@ -63,11 +61,10 @@ Feature: Adding a card
       user: oggy
       pass: kablam!
       """
-    Then the status code should be 0
-    And there should be no output
+    Then the app should exit with status 0
 
-    When I run the app with "show github"
-    Then I should be prompted for a password
+    When I run "roc show github"
+    Then the app should prompt "Password: "
 
     When I enter "wibble"
     Then the app should output:
@@ -82,12 +79,11 @@ Feature: Adding a card
     Given I have a rolodex with password "wibble"
     And I have a card "github"
 
-    When I run the app with "add github"
-    Then I should be prompted for a password
+    When I run "roc add github"
+    Then the app should prompt "Password: "
 
     When I enter "wibble"
     Then the app should exit with status 1
-    And there should be no output
     And the app should error:
       """
       error: "github" already exists

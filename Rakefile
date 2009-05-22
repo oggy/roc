@@ -13,7 +13,9 @@ $hoe = Hoe.new('roc', Roc::VERSION) do |p|
   #   ['activesupport','>= 2.0.2'],
   # ]
   p.extra_dev_deps = [
-    ['newgem', ">= #{::Newgem::VERSION}"]
+    ['newgem', ">= #{::Newgem::VERSION}"],
+    ['cucumber', ">= 0.3.6"],
+    ['command_rat', ">= 0.0.1"],
   ]
   
   p.clean_globs |= %w[**/.DS_Store tmp *.log]
@@ -25,5 +27,4 @@ end
 require 'newgem/tasks' # load /tasks/*.rake
 Dir['tasks/**/*.rake'].each { |t| load t }
 
-# TODO - want other tests/tasks run by default? Add them to the list
-# task :default => [:spec, :features]
+task :default => [:spec, :features]
