@@ -1,6 +1,6 @@
 Before do
-  @app = CommandRat::Session.new
-  @app.env = {'PATH' => File.expand_path("#{PROJECT_ROOT}/spec/mock-bin")}
+  @session = CommandRat::Session.new
+  @session.env = {'PATH' => File.expand_path("#{PROJECT_ROOT}/spec/mock-bin")}
 end
 
 After do
