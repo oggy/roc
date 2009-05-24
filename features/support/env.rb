@@ -1,3 +1,5 @@
 require 'cucumber'
-require 'spec'
+require 'spec/spec_helper'
 require 'command_rat/rspec'
+
+World(SpecHelper)
